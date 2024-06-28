@@ -1,17 +1,28 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+import StackHeader from '@/components/StackHeader';
+import { theme } from '@/constants/theme';
+import store from '@/store';
+import { NativeStackHeaderProps } from '@react-navigation/native-stack';
+import { PaperProvider } from 'react-native-paper';
+import { Provider } from 'react-redux';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+const header:
+  | ((props: NativeStackHeaderProps) => React.ReactNode)
+  | undefined = (props) => (
+  <StackHeader navProps={props}>
+    <></>
+  </StackHeader>
+);
+
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
@@ -27,11 +38,21 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <Provider store={store}>
+      <PaperProvider theme={theme}>
+        <Stack
+          screenOptions={{
+            animation: 'ios',
+            header,
+          }}
+        >
+          <Stack.Screen name="index" options={{ title: 'Home' }} />
+          <Stack.Screen
+            name="[id]"
+            options={{ title: 'Detail Form Contact' }}
+          />
+        </Stack>
+      </PaperProvider>
+    </Provider>
   );
 }
