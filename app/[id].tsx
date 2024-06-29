@@ -1,22 +1,44 @@
+import CardItem from '@/components/CardItem';
+import BaseLayout from '@/components/layouts/BaseLayout';
+import { ContactForm } from '@/models/Contact';
 import { contactApi } from '@/services/contact';
+import { ContactData } from '@/types/Contact';
 import { useGlobalSearchParams, useLocalSearchParams } from 'expo-router';
-import { ScrollView, Text } from 'react-native';
-import { Surface } from 'react-native-paper';
+import { useCallback } from 'react';
+import { Alert } from 'react-native';
 
-export default function FormContact() {
+export default function DetailContactScreen() {
   const globParam = useGlobalSearchParams<{ id: string }>();
   const localParam = useLocalSearchParams<{ id: string }>();
+  const id = globParam?.id ?? localParam?.id ?? '';
 
   const { data, isLoading } = contactApi.endpoints.getContactById.useQuery({
-    id: globParam?.id ?? localParam?.id ?? '',
+    id,
   });
+  const [updateContact, { isSuccess, isLoading: formLoad }] =
+    contactApi.endpoints.updateContact.useMutation();
+
+  const onSubmit = useCallback(
+    async (data: ContactForm) => {
+      await updateContact({
+        id,
+        ...data,
+      }).unwrap();
+      if (isSuccess) {
+        Alert.alert('Update contact successfully!');
+      }
+    },
+    [id, updateContact, isSuccess]
+  );
 
   return (
-    <ScrollView>
-      <Surface>
-        <Text>This is for form</Text>
-        <Text>{isLoading ? 'Loading...' : JSON.stringify(data, null, 4)}</Text>
-      </Surface>
-    </ScrollView>
+    <BaseLayout loading={isLoading}>
+      <CardItem
+        mode="contained"
+        contact={data?.data as ContactData}
+        loading={formLoad}
+        onSubmit={onSubmit}
+      ></CardItem>
+    </BaseLayout>
   );
 }

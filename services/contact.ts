@@ -1,6 +1,7 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { Contact, ContactData, ContactParam } from '../types/Contact';
+import { ContactForm } from '@/models/Contact';
 import { ApiResponse } from '@/types/Base';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import type { ContactData, ContactParam } from '../types/Contact';
 
 export const contactApi = createApi({
   reducerPath: 'contactApi',
@@ -8,20 +9,21 @@ export const contactApi = createApi({
     baseUrl: 'https://contact.herokuapp.com/',
   }),
   endpoints: (builder) => ({
-    getContact: builder.query<ContactData, number>({
+    getContact: builder.query<ApiResponse<ContactData[]>, number>({
       query: () => 'contact',
     }),
-    saveContact: builder.mutation<ApiResponse, Contact>({
+    saveContact: builder.mutation<ApiResponse, ContactForm>({
       query: (body) => ({
         url: 'contact',
         method: 'POST',
         body,
       }),
     }),
-    deleteContact: builder.mutation<ApiResponse, ContactParam>({
-      query: ({ id }: { id: string }) => ({
-        url: `contact/${id}`,
+    deleteContact: builder.mutation<ApiResponse, ContactData>({
+      query: (body) => ({
+        url: `contact/${body.id}`,
         method: 'DELETE',
+        body
       }),
     }),
     getContactById: builder.query<ApiResponse, ContactParam>({

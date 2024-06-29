@@ -1,6 +1,9 @@
 import { getHeaderTitle } from '@react-navigation/elements';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
-import { Appbar, AppbarProps } from 'react-native-paper';
+import { router } from 'expo-router';
+import { Appbar, AppbarProps, FAB } from 'react-native-paper';
+
+const Fab = FAB;
 
 interface StackHeaderProps extends AppbarProps {
   navProps: NativeStackHeaderProps;
@@ -15,6 +18,13 @@ const StackHeader = (props: StackHeaderProps) => (
     <Appbar.Content
       title={getHeaderTitle(props.navProps.options, props.navProps.route.name)}
     />
+    <Appbar.Header>
+      <Fab
+        icon="plus"
+        mode="flat"
+        onPress={() => router.navigate('/new')}
+      />
+    </Appbar.Header>
   </Appbar.Header>
 );
 

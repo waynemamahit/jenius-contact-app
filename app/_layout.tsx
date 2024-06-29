@@ -9,7 +9,9 @@ import { theme } from '@/constants/theme';
 import store from '@/store';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { PaperProvider } from 'react-native-paper';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
+import AlertProvider from '@/components/AlertProvider';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -40,18 +42,19 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
       <PaperProvider theme={theme}>
-        <Stack
-          screenOptions={{
-            animation: 'ios',
-            header,
-          }}
-        >
-          <Stack.Screen name="index" options={{ title: 'Home' }} />
-          <Stack.Screen
-            name="[id]"
-            options={{ title: 'Detail Form Contact' }}
-          />
-        </Stack>
+        <SafeAreaProvider>
+          <Stack
+            screenOptions={{
+              animation: 'ios',
+              header,
+            }}
+          >
+            <Stack.Screen name="index" options={{ title: 'Home' }} />
+            <Stack.Screen name="new" options={{ title: 'New Contact' }} />
+            <Stack.Screen name="[id]" options={{ title: 'Detail Contact' }} />
+          </Stack>
+          <AlertProvider />
+        </SafeAreaProvider>
       </PaperProvider>
     </Provider>
   );
