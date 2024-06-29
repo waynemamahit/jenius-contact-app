@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "jenius-contact-app",
-    "slug": "JeniusContactApp",
+    "name": "Jenius Contact App",
+    "slug": "jenius-contact-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

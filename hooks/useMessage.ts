@@ -2,27 +2,25 @@ import {
   dismissSnackbar,
   showMessage,
 } from '@/features/snackbar/snackbarSlice';
-import { MD2Colors } from 'react-native-paper';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-export default function useMessage(isSuccess: boolean) {
+export default function useMessage() {
   const dispatch = useDispatch();
 
-  return {
-    showMessageResult(message: string, error: string) {
+  const showMessageResult = useCallback(
+    (message: string) => {
       dispatch(
         showMessage({
-          message: isSuccess ? message : error,
-          ...(isSuccess
-            ? {}
-            : {
-                color: MD2Colors.redA100,
-              }),
+          message,
         })
       );
       setTimeout(() => {
         dispatch(dismissSnackbar());
       }, 3000);
     },
-  };
+    [dispatch]
+  );
+
+  return { showMessageResult };
 }

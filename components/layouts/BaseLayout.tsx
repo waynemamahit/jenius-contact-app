@@ -4,19 +4,21 @@ import { ProgressBar, useTheme } from 'react-native-paper';
 
 export default function BaseLayout({
   children,
-  loading,
+  loading = false,
 }: {
   children: ReactNode;
-  loading: boolean;
+  loading?: boolean;
 }) {
   const { colors } = useTheme();
 
   return (
     <ScrollView style={{ flex: 1 }}>
       {loading ? (
-        <ProgressBar indeterminate color={colors.primary} />  
+        <ProgressBar indeterminate color={colors.primary} />
       ) : (
-        <View style={{ flex: 1, paddingHorizontal: 10, paddingVertical: 6 }}>{children}</View>
+        <View style={{ flex: 1, paddingHorizontal: 10, paddingVertical: 6 }}>
+          {children}
+        </View>
       )}
     </ScrollView>
   );

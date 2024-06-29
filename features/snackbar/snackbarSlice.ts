@@ -10,7 +10,7 @@ export interface SnackbarState {
 const initialState: SnackbarState = {
   visible: false,
   message: '',
-  color: MD2Colors.green50,
+  color: MD2Colors.green600,
 };
 
 export const snackbarSlice = createSlice({

@@ -1,11 +1,14 @@
 import CardItem from '@/components/CardItem';
 import BaseLayout from '@/components/layouts/BaseLayout';
+import useMessage from '@/hooks/useMessage';
 import { ContactForm } from '@/models/Contact';
 import { contactApi } from '@/services/contact';
 import { ContactData } from '@/types/Contact';
-import { useGlobalSearchParams, useLocalSearchParams } from 'expo-router';
-import { useCallback } from 'react';
-import { Alert } from 'react-native';
+import {
+  router,
+  useGlobalSearchParams,
+  useLocalSearchParams,
+} from 'expo-router';
 
 export default function DetailContactScreen() {
   const globParam = useGlobalSearchParams<{ id: string }>();
@@ -15,21 +18,9 @@ export default function DetailContactScreen() {
   const { data, isLoading } = contactApi.endpoints.getContactById.useQuery({
     id,
   });
-  const [updateContact, { isSuccess, isLoading: formLoad }] =
+  const [updateContact, { isLoading: formLoad }] =
     contactApi.endpoints.updateContact.useMutation();
-
-  const onSubmit = useCallback(
-    async (data: ContactForm) => {
-      await updateContact({
-        id,
-        ...data,
-      }).unwrap();
-      if (isSuccess) {
-        Alert.alert('Update contact successfully!');
-      }
-    },
-    [id, updateContact, isSuccess]
-  );
+  const { showMessageResult } = useMessage();
 
   return (
     <BaseLayout loading={isLoading}>
@@ -37,7 +28,16 @@ export default function DetailContactScreen() {
         mode="contained"
         contact={data?.data as ContactData}
         loading={formLoad}
-        onSubmit={onSubmit}
+        onSubmit={async (data: ContactForm) => {
+          await updateContact({
+            id,
+            ...data,
+          });
+          showMessageResult(
+            'Contact has been update!',
+          );
+          router.navigate('');
+        }}
       ></CardItem>
     </BaseLayout>
   );

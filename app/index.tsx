@@ -11,15 +11,18 @@ import { AppDispatch } from '@/store';
 import { ContactData } from '@/types/Contact';
 import { ReactNode, useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
-import { IconButton, MD3Colors } from 'react-native-paper';
+import {
+  IconButton,
+  MD3Colors,
+} from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function HomeScreen() {
   const { data, isLoading } = contactApi.endpoints.getContact.useQuery(0);
-  const [deleteContact, { isLoading: deleteLoad, isSuccess }] =
+  const [deleteContact, { isLoading: deleteLoad }] =
     contactApi.endpoints.deleteContact.useMutation();
   const [selectedItem, setSelectedItem] = useState<ContactData | null>(null);
-  const { showMessageResult } = useMessage(isSuccess);
+  const { showMessageResult } = useMessage();
   const result = useSelector(getResultDialog);
   const dispatch: AppDispatch = useDispatch();
 
@@ -29,17 +32,14 @@ export default function HomeScreen() {
         if (selectedItem) {
           dispatch(dismissDialog());
           await deleteContact(selectedItem);
-          showMessageResult(
-            'Contact has been deleted',
-            'Failed delete contact'
-          );
+          showMessageResult('Contact has been deleted!');
         }
       })();
     }
   });
 
   return (
-    <BaseLayout loading={isLoading || deleteLoad}>
+    <BaseLayout loading={isLoading}>
       <FlatList
         data={data?.data ?? []}
         keyExtractor={(item) => item.id}
@@ -51,6 +51,7 @@ export default function HomeScreen() {
                 <IconButton
                   icon="delete"
                   iconColor={MD3Colors.error40}
+                  loading={deleteLoad && selectedItem?.id === item.id}
                   size={30}
                   onPress={() => {
                     dispatch(
