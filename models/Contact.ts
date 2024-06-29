@@ -1,7 +1,7 @@
-import { Contact } from "@/types/Contact";
+import { Contact } from '../types/Contact';
 
 export class ContactForm implements Contact {
-  age = '';
+  age: string | number = '';
   firstName = '';
   lastName = '';
   photo = '';

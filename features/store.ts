@@ -1,7 +1,7 @@
-import dialogSlice from '@/features/dialog/dialogSlice';
-import snackbarSlice from '@/features/snackbar/snackbarSlice';
-import { contactApi } from '@/services/contact';
 import { configureStore } from '@reduxjs/toolkit';
+import dialogSlice from '../features/dialog/dialogSlice';
+import snackbarSlice from '../features/snackbar/snackbarSlice';
+import { contactApi } from '../services/contact';
 
 const store = configureStore({
   reducer: {

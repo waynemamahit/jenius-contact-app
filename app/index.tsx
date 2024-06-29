@@ -1,15 +1,15 @@
-import CardItem from '@/components/CardItem';
-import BaseLayout from '@/components/layouts/BaseLayout';
-import { getResultDialog } from '@/features/dialog/dialogSelector';
-import { dismissDialog, show } from '@/features/dialog/dialogSlice';
-import { AppDispatch } from '@/features/store';
-import useMessage from '@/hooks/useMessage';
-import { contactApi } from '@/services/contact';
-import { ContactData } from '@/types/Contact';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import { IconButton, MD3Colors } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
+import CardItem from '../components/CardItem';
+import BaseLayout from '../components/layouts/BaseLayout';
+import { getResultDialog } from '../features/dialog/dialogSelector';
+import { dismissDialog, show } from '../features/dialog/dialogSlice';
+import { AppDispatch } from '../features/store';
+import useMessage from '../hooks/useMessage';
+import { contactApi } from '../services/contact';
+import { ContactData } from '../types/Contact';
 
 export default function HomeScreen() {
   const { data, isLoading, isFetching, refetch } =

@@ -1,9 +1,9 @@
-import FormCard from '@/components/FormCard';
-import BaseLayout from '@/components/layouts/BaseLayout';
-import useMessage from '@/hooks/useMessage';
-import { ContactForm } from '@/models/Contact';
-import { contactApi } from '@/services/contact';
 import { router } from 'expo-router';
+import FormCard from '../components/FormCard';
+import BaseLayout from '../components/layouts/BaseLayout';
+import useMessage from '../hooks/useMessage';
+import { ContactForm } from '../models/Contact';
+import { contactApi } from '../services/contact';
 
 const newForm = new ContactForm();
 

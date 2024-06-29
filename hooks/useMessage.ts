@@ -1,9 +1,9 @@
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   dismissSnackbar,
   showMessage,
-} from '@/features/snackbar/snackbarSlice';
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+} from '../features/snackbar/snackbarSlice';
 
 export default function useMessage() {
   const dispatch = useDispatch();

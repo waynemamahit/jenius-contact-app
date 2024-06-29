@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Dialog, Portal, Snackbar, Text } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { dismissDialog, submit } from '@/features/dialog/dialogSlice';
-import { RootState } from '@/store';
-import { dismissSnackbar } from '@/features/snackbar/snackbarSlice';
+import { dismissDialog, submit } from '../features/dialog/dialogSlice';
+import { dismissSnackbar } from '../features/snackbar/snackbarSlice';
+import { RootState } from '../features/store';
 
 export default function AlertProvider() {
   const { dialog, snackbar } = useSelector((state: RootState) => state);

@@ -1,6 +1,6 @@
-import { SubmitHandler } from "react-hook-form";
-import { ContactData } from "./Contact";
-import { ContactForm } from "@/models/Contact";
+import { SubmitHandler } from 'react-hook-form';
+import { ContactForm } from '../models/Contact';
+import { ContactData } from './Contact';
 
 export type ApiResponse<Data = ContactData> = {
   message: string;

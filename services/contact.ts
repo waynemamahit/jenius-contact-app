@@ -1,6 +1,6 @@
-import { ContactForm } from '@/models/Contact';
-import { ApiResponse } from '@/types/Base';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { ContactForm } from '../models/Contact';
+import { ApiResponse } from '../types/Base';
 import type { ContactData, ContactParam } from '../types/Contact';
 
 export const contactApi = createApi({
@@ -23,7 +23,7 @@ export const contactApi = createApi({
       query: (body) => ({
         url: `contact/${body.id}`,
         method: 'DELETE',
-        body
+        body,
       }),
     }),
     getContactById: builder.query<ApiResponse, ContactParam>({

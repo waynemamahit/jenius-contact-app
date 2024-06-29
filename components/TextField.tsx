@@ -1,6 +1,6 @@
-import { ContactForm } from '@/models/Contact';
 import { Control, useController } from 'react-hook-form';
 import { TextInput } from 'react-native-paper';
+import { ContactForm } from '../models/Contact';
 
 export default function TextField({
   label = '',

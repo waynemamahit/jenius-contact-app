@@ -1,7 +1,8 @@
-import { OnSubmitType } from '@/types/Base';
-import { ContactData } from '@/types/Contact';
 import { router } from 'expo-router';
 import { Avatar, Card } from 'react-native-paper';
+import { ContactForm } from '../models/Contact';
+import { OnSubmitType } from '../types/Base';
+import { ContactData } from '../types/Contact';
 import FormCard from './FormCard';
 
 const left = (uri: string) => {
@@ -20,7 +21,7 @@ const CardItem = ({
   mode?: 'outlined' | 'contained';
   loading?: boolean;
   onSubmit?: OnSubmitType;
-  right?: ((props: { size: number }) => React.ReactNode);
+  right?: (props: { size: number }) => React.ReactNode;
 }) => {
   const isOutlined = mode === 'outlined';
   const fullName = `${contact.firstName} ${contact.lastName}`;
@@ -34,7 +35,7 @@ const CardItem = ({
         cursor: isOutlined ? 'pointer' : undefined,
       }}
       loading={loading}
-      form={contact}
+      form={contact as ContactForm}
       onPress={() => (isOutlined ? router.push('/' + contact.id) : undefined)}
       onSubmit={onSubmit}
     >

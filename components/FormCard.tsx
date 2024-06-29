@@ -1,5 +1,3 @@
-import { ContactForm } from '@/models/Contact';
-import { OnSubmitType } from '@/types/Base';
 import { router } from 'expo-router';
 import React, { ReactNode, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -7,6 +5,8 @@ import { Button, Card, Icon, useTheme } from 'react-native-paper';
 import { IconSource } from 'react-native-paper/lib/typescript/components/Icon';
 import { MD3Colors } from 'react-native-paper/lib/typescript/types';
 import { StyleProps } from 'react-native-reanimated';
+import { ContactForm } from '../models/Contact';
+import { OnSubmitType } from '../types/Base';
 import TextField from './TextField';
 
 const submitIcon = (colors: MD3Colors) => {

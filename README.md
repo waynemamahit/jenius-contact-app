@@ -7,7 +7,7 @@ This is a project for Technical Test using [React Native](https://reactnative.de
 1. Install dependencies
 
    ```bash
-   npm install
+   npm i
    ```
 
 2. Start the app
@@ -24,3 +24,27 @@ In the output, you'll find options to open the app in a
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+3. Build app using vercel for web
+
+   ```bash
+    npm i -g vercel
+   ```
+   ```bash
+    vercel
+   ```
+
+4. Or Install EAS for build into mobile platform
+
+   ```bash
+    npm i -g eas-cli
+   ```
+
+5. Build app using eas as bundle or preview
+
+   ```bash
+    eas build -p [android|ios]
+   ```
+   ```bash
+    eas build -p [android|ios] --profile preview
+   ```
