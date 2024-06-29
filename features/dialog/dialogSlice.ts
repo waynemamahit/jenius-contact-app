@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SnackbarState } from '../snackbar/snackbarSlice';
-import { RootState } from '@/store';
 
 export interface DialogState extends SnackbarState {
   title: string;
@@ -42,7 +41,5 @@ export const dialogSlice = createSlice({
 });
 
 export const { show, submit, dismissDialog } = dialogSlice.actions;
-
-export const getResultDialog = (state: RootState) => state.dialog.result;
 
 export default dialogSlice.reducer;

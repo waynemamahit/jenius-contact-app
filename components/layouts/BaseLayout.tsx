@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { ScrollView, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { ProgressBar, useTheme } from 'react-native-paper';
 
 export default function BaseLayout({
@@ -12,7 +12,7 @@ export default function BaseLayout({
   const { colors } = useTheme();
 
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       {loading ? (
         <ProgressBar indeterminate color={colors.primary} />
       ) : (
@@ -20,6 +20,6 @@ export default function BaseLayout({
           {children}
         </View>
       )}
-    </ScrollView>
+    </SafeAreaView>
   );
 }

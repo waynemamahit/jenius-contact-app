@@ -12,7 +12,7 @@ export default function TextField({
   control: Control<ContactForm>;
 }) {
   const {
-    field: { value, onChange },
+    field: { value, onChange, name: fieldName },
   } = useController({
     name,
     control,
@@ -21,6 +21,7 @@ export default function TextField({
   return (
     <TextInput
       label={label}
+      keyboardType={fieldName === 'age' ? 'number-pad' : 'default'}
       value={value as string | undefined}
       onChangeText={onChange}
     />

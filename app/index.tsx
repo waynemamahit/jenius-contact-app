@@ -1,30 +1,29 @@
 import CardItem from '@/components/CardItem';
 import BaseLayout from '@/components/layouts/BaseLayout';
-import {
-  dismissDialog,
-  getResultDialog,
-  show,
-} from '@/features/dialog/dialogSlice';
+import { getResultDialog } from '@/features/dialog/dialogSelector';
+import { dismissDialog, show } from '@/features/dialog/dialogSlice';
+import { AppDispatch } from '@/features/store';
 import useMessage from '@/hooks/useMessage';
 import { contactApi } from '@/services/contact';
-import { AppDispatch } from '@/store';
 import { ContactData } from '@/types/Contact';
-import { ReactNode, useEffect, useState } from 'react';
-import { FlatList } from 'react-native';
-import {
-  IconButton,
-  MD3Colors,
-} from 'react-native-paper';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { FlatList, RefreshControl } from 'react-native';
+import { IconButton, MD3Colors } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function HomeScreen() {
-  const { data, isLoading } = contactApi.endpoints.getContact.useQuery(0);
+  const { data, isLoading, isFetching, refetch } =
+    contactApi.endpoints.getContact.useQuery(0);
   const [deleteContact, { isLoading: deleteLoad }] =
     contactApi.endpoints.deleteContact.useMutation();
   const [selectedItem, setSelectedItem] = useState<ContactData | null>(null);
   const { showMessageResult } = useMessage();
   const result = useSelector(getResultDialog);
   const dispatch: AppDispatch = useDispatch();
+
+  const onRefresh = useCallback(() => {
+    refetch();
+  }, [refetch]);
 
   useEffect(() => {
     if (result) {
@@ -42,6 +41,9 @@ export default function HomeScreen() {
     <BaseLayout loading={isLoading}>
       <FlatList
         data={data?.data ?? []}
+        refreshControl={
+          <RefreshControl refreshing={isFetching} onRefresh={onRefresh} />
+        }
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <CardItem

@@ -39,7 +39,7 @@ export default function FormCard({
   useEffect(() => {
     setValue('firstName', form.firstName);
     setValue('lastName', form.lastName);
-    setValue('age', form.age);
+    setValue('age', form.age.toString());
     setValue('photo', form.photo);
   }, [form, setValue]);
 

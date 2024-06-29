@@ -4,14 +4,14 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
+import AlertProvider from '@/components/AlertProvider';
 import StackHeader from '@/components/StackHeader';
 import { theme } from '@/constants/theme';
-import store from '@/store';
+import store from '@/features/store';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
-import AlertProvider from '@/components/AlertProvider';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();

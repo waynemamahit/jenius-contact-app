@@ -1,9 +1,9 @@
 export type Contact = {
   firstName: string;
   lastName: string;
-  age: number;
+  age: string | number;
   photo: string;
-}
+};
 
 export type ContactParam = {
   id: string;
