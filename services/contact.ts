@@ -19,11 +19,10 @@ export const contactApi = createApi({
         body,
       }),
     }),
-    deleteContact: builder.mutation<ApiResponse, ContactData>({
-      query: (body) => ({
-        url: `contact/${body.id}`,
+    deleteContact: builder.mutation<ApiResponse, ContactParam>({
+      query: ({ id }) => ({
+        url: `contact/${id}`,
         method: 'DELETE',
-        body,
       }),
     }),
     getContactById: builder.query<ApiResponse, ContactParam>({

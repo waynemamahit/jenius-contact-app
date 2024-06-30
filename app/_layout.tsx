@@ -8,7 +8,7 @@ import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
-import AlertProvider from '../components/AlertProvider';
+import MessageProvider from '../components/MessageProvider';
 import StackHeader from '../components/StackHeader';
 import { theme } from '../constants/theme';
 import store from '../features/store';
@@ -19,7 +19,7 @@ SplashScreen.preventAutoHideAsync();
 const header:
   | ((props: NativeStackHeaderProps) => React.ReactNode)
   | undefined = (props) => (
-  <StackHeader navProps={props}>
+  <StackHeader navProps={props} canBack={false}>
     <></>
   </StackHeader>
 );
@@ -52,8 +52,8 @@ export default function RootLayout() {
             <Stack.Screen name="index" options={{ title: 'Home' }} />
             <Stack.Screen name="new" options={{ title: 'New Contact' }} />
             <Stack.Screen name="[id]" options={{ title: 'Detail Contact' }} />
+            <MessageProvider />
           </Stack>
-          <AlertProvider />
         </SafeAreaProvider>
       </PaperProvider>
     </Provider>

@@ -1,3 +1,4 @@
+import { useNavigation } from 'expo-router';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import { IconButton, MD3Colors } from 'react-native-paper';
@@ -20,10 +21,15 @@ export default function HomeScreen() {
   const { showMessageResult } = useMessage();
   const result = useSelector(getResultDialog);
   const dispatch: AppDispatch = useDispatch();
+  const { addListener } = useNavigation();
 
   const onRefresh = useCallback(() => {
     refetch();
   }, [refetch]);
+
+  useEffect(() => {
+    addListener('focus', () => refetch());
+  }, [addListener, refetch]);
 
   useEffect(() => {
     if (result) {
@@ -35,7 +41,7 @@ export default function HomeScreen() {
         }
       })();
     }
-  });
+  }, [deleteContact, dispatch, result, selectedItem, showMessageResult]);
 
   return (
     <BaseLayout loading={isLoading}>

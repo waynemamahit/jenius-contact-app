@@ -5,7 +5,7 @@ import { dismissDialog, submit } from '../features/dialog/dialogSlice';
 import { dismissSnackbar } from '../features/snackbar/snackbarSlice';
 import { RootState } from '../features/store';
 
-export default function AlertProvider() {
+export default function MessageProvider() {
   const { dialog, snackbar } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 

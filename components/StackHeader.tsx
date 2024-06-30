@@ -5,25 +5,30 @@ import { Appbar, AppbarProps } from 'react-native-paper';
 
 interface StackHeaderProps extends AppbarProps {
   navProps: NativeStackHeaderProps;
+  canBack?: boolean;
 }
 
-const StackHeader = (props: StackHeaderProps) => (
-  <Appbar.Header {...props}>
-    {props.navProps.back ? (
-      <Appbar.BackAction onPress={props.navProps.navigation.goBack} />
-    ) : null}
+const StackHeader = (props: StackHeaderProps) => {
+  const { navProps, canBack = true } = props;
 
-    <Appbar.Content
-      title={getHeaderTitle(props.navProps.options, props.navProps.route.name)}
-    />
-    {props.navProps.route.name === 'index' ? (
-      <Appbar.Action
-        icon="plus"
-        size={40}
-        onPress={() => router.navigate('/new')}
+  return (
+    <Appbar.Header {...props}>
+      {navProps.back && canBack ? (
+        <Appbar.BackAction onPress={navProps.navigation.goBack} />
+      ) : null}
+
+      <Appbar.Content
+        title={getHeaderTitle(navProps.options, navProps.route.name)}
       />
-    ) : null}
-  </Appbar.Header>
-);
+      {props.navProps.route.name === 'index' ? (
+        <Appbar.Action
+          icon="plus"
+          size={40}
+          onPress={() => router.navigate('/new')}
+        />
+      ) : null}
+    </Appbar.Header>
+  );
+};
 
 export default StackHeader;

@@ -38,7 +38,7 @@ export default function DetailContactScreen() {
             showMessageResult('Contact has been update!');
             router.navigate('');
           }}
-        ></CardItem>
+        />
       </ScrollView>
     </BaseLayout>
   );
