@@ -1,7 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-export const getResultDialog = createSelector(
-  (state: RootState) => state.dialog,
-  ({ result }) => result
-);
+const getState = (state: RootState) => state.dialog;
+
+export const getDialog = createSelector(getState, (state) => state);
+
+export const getResultDialog = createSelector(getState, ({ result }) => result);

@@ -43,6 +43,7 @@ export default function RootLayout() {
     <Provider store={store}>
       <PaperProvider theme={theme}>
         <SafeAreaProvider>
+          <MessageProvider />
           <Stack
             screenOptions={{
               animation: 'ios',
@@ -52,7 +53,6 @@ export default function RootLayout() {
             <Stack.Screen name="index" options={{ title: 'Home' }} />
             <Stack.Screen name="new" options={{ title: 'New Contact' }} />
             <Stack.Screen name="[id]" options={{ title: 'Detail Contact' }} />
-            <MessageProvider />
           </Stack>
         </SafeAreaProvider>
       </PaperProvider>

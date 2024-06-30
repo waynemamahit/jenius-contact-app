@@ -1,12 +1,14 @@
 import React from 'react';
 import { Button, Dialog, Portal, Snackbar, Text } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
+import { getDialog } from '../features/dialog/dialogSelector';
 import { dismissDialog, submit } from '../features/dialog/dialogSlice';
+import { getSnackbar } from '../features/snackbar/snackbarSelector';
 import { dismissSnackbar } from '../features/snackbar/snackbarSlice';
-import { RootState } from '../features/store';
 
 export default function MessageProvider() {
-  const { dialog, snackbar } = useSelector((state: RootState) => state);
+  const dialog = useSelector(getDialog);
+  const snackbar = useSelector(getSnackbar);
   const dispatch = useDispatch();
 
   return (
