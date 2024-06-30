@@ -40,7 +40,7 @@ You can start developing by editing the files inside the **app** directory. This
     npm i -g eas-cli
    ```
 
-5. Build app using eas as bundle or preview
+5. Build app using EAS as bundle or preview
 
    ```bash
     eas build -p [android|ios]
